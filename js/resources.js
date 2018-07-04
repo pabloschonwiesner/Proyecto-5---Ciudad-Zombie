@@ -3,6 +3,7 @@ Nos sirve para manejar el guardado de las imagenes del juego y no tener
 que cargarlas continuamente cada vez que se necesiten por cada frame.*/
 
 (function() {
+    
     var resourceCache = {};
     var loading = [];
     var readyCallbacks = [];

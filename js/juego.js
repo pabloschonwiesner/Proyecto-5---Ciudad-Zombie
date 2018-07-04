@@ -16,12 +16,29 @@ var Juego = {
   vidasInicial: Jugador.vidas,
   // Indica si el jugador gano
   ganador: false,
-
   obstaculosCarretera: [
     /*Aca se van a agregar los obstaculos visibles. Tenemos una valla horizontal
     de ejemplo, pero podras agregar muchos mas. */
-    new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1)
+    new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 100, 430, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 130, 430, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 130, 100, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 160, 100, 30, 30, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 220, 450, 30, 30, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 480, 450, 30, 30, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 480, 480, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 520, 430, 30, 30, 1),
+    new Obstaculo('imagenes/auto_verde_derecha.png', 370, 470, 30, 15, 1),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 860, 390, 15, 30, 1),
+    new Obstaculo('imagenes/bache.png', 300, 480, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 810, 420, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 180, 285, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 510, 130, 30, 30, 1),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 180, 235, 15, 30, 1),
+  ],
 
+  regalos: [
+    new Regalo('imagenes/regalo.png', 110, 470, 30, 30, 1)
   ],
   /* Estos son los bordes con los que se puede chocar, por ejemplo, la vereda.
    Ya estan ubicados en sus lugares correspondientes. Ya aparecen en el mapa, ya
@@ -33,18 +50,28 @@ var Juego = {
     new Obstaculo('', 0, 5, 18, 572, 0),
     new Obstaculo('', 943, 5, 18, 572, 0),
     // Veredas
-    new Obstaculo('', 18, 23, 51, 536, 2),
-    new Obstaculo('', 69, 507, 690, 52, 2),
-    new Obstaculo('', 587, 147, 173, 360, 2),
-    new Obstaculo('', 346, 147, 241, 52, 2),
-    new Obstaculo('', 196, 267, 263, 112, 2),
-    new Obstaculo('', 196, 23, 83, 244, 2),
-    new Obstaculo('', 279, 23, 664, 56, 2),
-    new Obstaculo('', 887, 79, 56, 480, 2)
+    new Obstaculo('', 18, 23, 51, 536, 1),
+    new Obstaculo('', 69, 507, 690, 52, 1),
+    new Obstaculo('', 587, 147, 173, 360, 1),
+    new Obstaculo('', 346, 147, 241, 52, 1),
+    new Obstaculo('', 196, 267, 263, 112, 1),
+    new Obstaculo('', 196, 23, 83, 244, 1),
+    new Obstaculo('', 279, 23, 664, 56, 1),
+    new Obstaculo('', 887, 79, 56, 480, 1)
   ],
+   
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
-
+    
+    new ZombieCaminante('imagenes/zombie1.png',887, 79, 20, 20, 2, {"desdeX": "0", "hastaX": "961", "desdeY": "0", "hastaY": "577"}),
+    new ZombieCaminante('imagenes/zombie2.png',500, 120, 20, 20, 3, {"desdeX": "0", "hastaX": "961", "desdeY": "0", "hastaY": "577"}),
+    new ZombieCaminante('imagenes/zombie3.png',500, 250, 20, 20, 4, {"desdeX": "0", "hastaX": "961", "desdeY": "0", "hastaY": "577"}),
+    new ZombieCaminante('imagenes/zombie4.png',1, 450, 20, 20, 5, {"desdeX": "0", "hastaX": "961", "desdeY": "0", "hastaY": "577"}),
+    new ZombieCaminante('imagenes/zombie3.png',100, 50, 20, 20, 4, {"desdeX": "0", "hastaX": "961", "desdeY": "0", "hastaY": "577"}),
+    new ZombieCaminante('imagenes/zombie2.png',400, 500, 20, 20, 3, {"desdeX": "0", "hastaX": "961", "desdeY": "0", "hastaY": "577"}),
+    new ZombieConductor('imagenes/tren_vertical.png', 644, 1, 30, 90, 6, {"desdeX": "0", "hastaX": "961", "desdeY": "0", "hastaY": "577"}, 'v'),
+    new ZombieConductor('imagenes/tren_vertical.png', 678, 200, 30, 90, 2, {"desdeX": "0", "hastaX": "961", "desdeY": "0", "hastaY": "577"}, 'v'),
+    new ZombieConductor('imagenes/tren_horizontal.png', 400, 322, 90, 30, 2, {"desdeX": "0", "hastaX": "961", "desdeY": "0", "hastaY": "577"}, 'h'),
   ]
 
 }
@@ -72,7 +99,8 @@ Juego.iniciarRecursos = function() {
     'imagenes/auto_rojo_derecha.png',
     'imagenes/auto_rojo_izquierda.png',
     'imagenes/auto_verde_abajo.png',
-    'imagenes/auto_verde_derecha.png'
+    'imagenes/auto_verde_derecha.png',
+    'imagenes/regalo.png'
   ]);
   Resources.onReady(this.comenzar.bind(Juego));
 };
@@ -85,6 +113,7 @@ Juego.obstaculos = function() {
 Juego.comenzar = function() {
   // Inicializar el canvas del juego
   Dibujante.inicializarCanvas(this.anchoCanvas, this.altoCanvas);
+
   /* El bucle principal del juego se llamara continuamente para actualizar
   los movimientos y el pintado de la pantalla. Sera el encargado de calcular los
   ataques, colisiones, etc*/
@@ -132,6 +161,7 @@ Juego.capturarMovimiento = function(tecla) {
     de sus metodos  */
 
     /* COMPLETAR */
+    this.jugador.mover(movX, movY);
   }
 };
 
@@ -147,15 +177,32 @@ Juego.dibujar = function() {
   "Dibujante dibuja al jugador" */
 
   /* Completar */
+  if(this.jugador.vidas > 0) {
+    Dibujante.dibujarEntidad(this.jugador);
+    //dibuja llegada
+    Dibujante.dibujarRectangulo('yellow', 760, 543, 126, 20);
+  } else {
+    this.jugador.x = -100;
+    this.jugador.y = -100;
+    this.jugador.ancho = 0;
+    this.jugador.alto = 0;
+    Dibujante.dibujarEntidad(this.jugador);
+  }
+  
 
   // Se recorren los obstaculos de la carretera pintandolos
   this.obstaculosCarretera.forEach(function(obstaculo) {
     Dibujante.dibujarEntidad(obstaculo);
   });
 
+  this.regalos.forEach(function(regalo) {
+    if(regalo.visible) Dibujante.dibujarEntidad(regalo);
+  });
+
   // Se recorren los enemigos pintandolos
   this.enemigos.forEach(function(enemigo) {
     /* Completar */
+    Dibujante.dibujarEntidad(enemigo);
   });
 
   // El dibujante dibuja las vidas del jugador
@@ -167,13 +214,14 @@ Juego.dibujar = function() {
   }
 };
 
-
-
 /* Recorre los enemigos haciendo que se muevan. De la misma forma que hicimos
 un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
 una funcionalidad similar pero para que se muevan.*/
 Juego.moverEnemigos = function() {
   /* COMPLETAR */
+  this.enemigos.forEach(function(enemigo) {
+   enemigo.mover();
+  },this);
 };
 
 /* Recorre los enemigos para ver cual esta colisionando con el jugador
@@ -183,15 +231,15 @@ se ven las colisiones con los obstaculos. En este caso sera con los zombies. */
 Juego.calcularAtaques = function() {
   this.enemigos.forEach(function(enemigo) {
     if (this.intersecan(enemigo, this.jugador, this.jugador.x, this.jugador.y)) {
-      /* Si el enemigo colisiona debe empezar su ataque
-      COMPLETAR */
+      // Si el enemigo colisiona debe empezar su ataque
+      enemigo.comenzarAtaque(this.jugador);
     } else {
-      /* Sino, debe dejar de atacar
-      COMPLETAR */
+      // Sino, debe dejar de atacar
+      //COMPLETAR 
+      enemigo.dejarDeAtacar(this.jugador);
     }
   }, this);
 };
-
 
 
 /* Aca se chequea si el jugador se peude mover a la posicion destino.
@@ -200,10 +248,15 @@ Juego.chequearColisiones = function(x, y) {
   var puedeMoverse = true
   this.obstaculos().forEach(function(obstaculo) {
     if (this.intersecan(obstaculo, this.jugador, x, y)) {
-
       /*COMPLETAR, obstaculo debe chocar al jugador*/
-
+      obstaculo.chocar(this.jugador);
       puedeMoverse = false
+    }
+  }, this)
+
+  this.regalos.forEach(function(regalo) {
+    if(this.intersecan(regalo, this.jugador, x, y)) {
+      regalo.chocar(this.jugador);
     }
   }, this)
   return puedeMoverse
@@ -225,15 +278,23 @@ Juego.intersecan = function(elemento1, elemento2, x, y) {
     (derecha1 >= izquierda2) && (izquierda1 <= derecha2))
 };
 
+Juego.reiniciarObjetos = function() {
+  this.enemigos = [];
+  this.obstaculosCarretera = [];
+  this.regalos = [];
+}
+
 Juego.dibujarFondo = function() {
   // Si se termino el juego hay que mostrar el mensaje de game over de fondo
-  if (this.terminoJuego()) {
+  if (this.terminoJuego()) {  
     Dibujante.dibujarImagen('imagenes/mensaje_gameover.png', 0, 5, this.anchoCanvas, this.altoCanvas);
     document.getElementById('reiniciar').style.visibility = 'visible';
+    this.reiniciarObjetos();
   }
 
   // Si se gano el juego hay que mostrar el mensaje de ganoJuego de fondo
   else if (this.ganoJuego()) {
+    this.reiniciarObjetos();
     Dibujante.dibujarImagen('imagenes/Splash.png', 190, 113, 500, 203);
     document.getElementById('reiniciar').style.visibility = 'visible';
   } else {
